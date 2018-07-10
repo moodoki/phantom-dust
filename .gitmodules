@@ -1,3 +1,3 @@
-[submodule "content/storage/ghost-github"]
+[submodule "content/adapters/storage/ghost-github"]
 	path = content/adapters/storage/ghost-github
 	url = https://github.com/ifvictr/ghost-github.git
