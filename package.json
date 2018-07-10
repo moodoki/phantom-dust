@@ -53,6 +53,7 @@
     "express-hbs": "1.0.4",
     "extract-zip": "1.6.7",
     "fs-extra": "3.0.1",
+    "ghost-github": "^1.0.2",
     "ghost-gql": "0.0.10",
     "ghost-ignition": "2.9.4",
     "ghost-storage-base": "0.0.3",
