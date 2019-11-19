@@ -6,6 +6,8 @@ var _ = require('lodash'),
     PostsImporter = require('./posts'),
     TagsImporter = require('./tags'),
     SettingsImporter = require('./settings'),
+    ClientsImporter = require('./clients'),
+    TrustedDomainsImporter = require('./trusted-domains'),
     UsersImporter = require('./users'),
     RolesImporter = require('./roles'),
     importers = {},
@@ -26,6 +28,8 @@ DataImporter = {
         importers.subscribers = new SubscribersImporter(importData.data);
         importers.posts = new PostsImporter(importData.data);
         importers.settings = new SettingsImporter(importData.data);
+        importers.clients = new ClientsImporter(importData.data);
+        importers.trustedDomains = new TrustedDomainsImporter(importData.data);
 
         return importData;
     },
@@ -121,6 +125,11 @@ DataImporter = {
             return toReturn;
         }).catch(function (errors) {
             return Promise.reject(errors);
+        }).finally(() => {
+            // release memory
+            importers = {};
+            results = null;
+            importData = null;
         });
     }
 };

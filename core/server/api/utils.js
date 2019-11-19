@@ -193,7 +193,7 @@ utils = {
      * ## Handle Permissions
      * @param {String} docName
      * @param {String} method (browse || read || edit || add || destroy)
-     * * @param {Array} unsafeAttrNames - attribute names (e.g. post.status) that could change the outcome
+     * @param {Array} unsafeAttrNames - attribute names (e.g. post.status) that could change the outcome
      * @returns {Function}
      */
     handlePermissions: function handlePermissions(docName, method, unsafeAttrNames) {
@@ -273,16 +273,20 @@ utils = {
      * @param {Array} allowedIncludes
      * @returns {Function} doConversion
      */
-    convertOptions: function convertOptions(allowedIncludes, allowedFormats) {
+    convertOptions: function convertOptions(allowedIncludes, allowedFormats, convertOptions = {forModel: true}) {
         /**
-         * Convert our options from API-style to Model-style
+         * Convert our options from API-style to Model-style (default)
          * @param {Object} options
          * @returns {Object} options
          */
         return function doConversion(options) {
             if (options.include) {
-                options.withRelated = utils.prepareInclude(options.include, allowedIncludes);
-                delete options.include;
+                if (!convertOptions.forModel) {
+                    options.include = utils.prepareInclude(options.include, allowedIncludes);
+                } else {
+                    options.withRelated = utils.prepareInclude(options.include, allowedIncludes);
+                    delete options.include;
+                }
             }
 
             if (options.fields) {
