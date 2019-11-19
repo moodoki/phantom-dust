@@ -15,28 +15,22 @@ require('./base/listeners');
 exports = module.exports;
 
 models = [
+    'accesstoken',
     'app-field',
     'app-setting',
     'app',
+    'client-trusted-domain',
+    'client',
     'permission',
     'post',
+    'refreshtoken',
     'role',
     'settings',
-    'session',
+    'subscriber',
     'tag',
-    'tag-public',
     'user',
-    'author',
     'invite',
-    'webhook',
-    'integration',
-    'api-key',
-    'mobiledoc-revision',
-    'member',
-    'action',
-    'posts-meta',
-    'member-stripe-customer',
-    'stripe-customer-subscription'
+    'webhook'
 ];
 
 function init() {

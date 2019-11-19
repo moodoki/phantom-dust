@@ -9,8 +9,7 @@ module.exports.config = {
 
 module.exports.up = function insertFixtures(options) {
     var localOptions = _.merge({
-        context: {internal: true},
-        migrating: true
+        context: {internal: true}
     }, options);
 
     return Promise.mapSeries(fixtures.models, function (model) {

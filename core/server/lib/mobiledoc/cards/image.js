@@ -1,6 +1,4 @@
-const createCard = require('../create-card');
-
-module.exports = createCard({
+module.exports = {
     name: 'image',
     type: 'dom',
     render(opts) {
@@ -13,43 +11,24 @@ module.exports = createCard({
         }
 
         let figure = dom.createElement('figure');
-        let figureClass = 'kg-card kg-image-card';
-        if (payload.cardWidth) {
-            figureClass = `${figureClass} kg-width-${payload.cardWidth}`;
-        }
-        figure.setAttribute('class', figureClass);
+        figure.setAttribute('class', 'kg-image-card');
 
         let img = dom.createElement('img');
+        let imgClass = 'kg-image';
+        if (payload.imageStyle) {
+            imgClass = `${imgClass} kg-image-${payload.imageStyle}`;
+        }
         img.setAttribute('src', payload.src);
-        img.setAttribute('class', 'kg-image');
-        if (payload.alt) {
-            img.setAttribute('alt', payload.alt);
-        }
-        if (payload.title) {
-            img.setAttribute('title', payload.title);
-        }
+        img.setAttribute('class', imgClass);
 
         figure.appendChild(img);
 
         if (payload.caption) {
             let figcaption = dom.createElement('figcaption');
-            figcaption.appendChild(dom.createRawHTMLSection(payload.caption));
+            figcaption.appendChild(dom.createTextNode(payload.caption));
             figure.appendChild(figcaption);
-            figure.setAttribute('class', `${figure.getAttribute('class')} kg-card-hascaption`);
         }
 
         return figure;
-    },
-
-    absoluteToRelative(urlUtils, payload, options) {
-        payload.src = payload.src && urlUtils.absoluteToRelative(payload.src, options);
-        payload.caption = payload.caption && urlUtils.htmlAbsoluteToRelative(payload.caption, options);
-        return payload;
-    },
-
-    relativeToAbsolute(urlUtils, payload, options) {
-        payload.src = payload.src && urlUtils.relativeToAbsolute(payload.src, options);
-        payload.caption = payload.caption && urlUtils.htmlRelativeToAbsolute(payload.caption, options);
-        return payload;
     }
-});
+};
